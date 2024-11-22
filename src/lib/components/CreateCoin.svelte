@@ -14,7 +14,7 @@
     // Define form fields for creating a denom, minting, and removing admin
     let denomData = {
       denom: '',
-      amount: '',
+      amount: 0,
       mintToAddress: walletAddress,
       removeAdmin: true,
       decimals: 6,
