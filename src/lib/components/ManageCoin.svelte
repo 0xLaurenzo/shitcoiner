@@ -1,8 +1,5 @@
 <script lang="ts">
     import { osmosis } from 'osmojs';
-    import { SigningStargateClient } from '@cosmjs/stargate';
-    import { coin } from '@cosmjs/amino';
-    import { Dec, IntPretty } from '@keplr-wallet/unit';
     import type { OfflineSigner } from '@cosmjs/proto-signing';
 	import { createStargateClient } from '$lib/stargate';
 
