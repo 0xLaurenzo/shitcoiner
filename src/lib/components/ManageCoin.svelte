@@ -80,10 +80,14 @@
     <li>Add to CL pool</li>
 </ul>
 
-<div class="burn-section">
-    <h3>Burn Tokens</h3>
-    <form on:submit|preventDefault={handleBurn}>
-        <select bind:value={selectedToken} required>
+<div class="bg-red-50 border-2 border-red-400 rounded-lg p-6 my-4 shadow-md">
+    <h3 class="text-red-700 text-xl font-semibold mb-4">Burn Tokens</h3>
+    <form on:submit|preventDefault={handleBurn} class="flex flex-col gap-4">
+        <select 
+            bind:value={selectedToken} 
+            required
+            class="p-2 border border-red-200 rounded-md text-base focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"
+        >
             <option value="">Select token</option>
             {#if balances}
                 {#each balances.filter(b => b.denom.startsWith('factory')) as balance}
@@ -98,9 +102,14 @@
             placeholder="Amount to burn" 
             required 
             min="0"
+            class="p-2 border border-red-200 rounded-md text-base focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"
         />
         
-        <button type="submit" disabled={!selectedToken || !burnAmount}>
+        <button 
+            type="submit" 
+            disabled={!selectedToken || !burnAmount}
+            class="bg-red-500 text-white py-3 px-4 rounded-md font-semibold transition-colors duration-200 hover:bg-red-600 disabled:bg-red-200 disabled:cursor-not-allowed"
+        >
             Burn Tokens
         </button>
     </form>
