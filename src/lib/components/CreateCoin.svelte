@@ -141,7 +141,7 @@
       </div>
 
       <div class="space-y-1">
-        <label class="text-sm font-medium">Mint Amount</label>
+        <label class="text-sm font-medium">Mint Amount (e.g., 1000000 for 1M tokens)</label>
         <input
           type="text"
           placeholder="e.g., 1,000,000"
@@ -151,7 +151,7 @@
       </div>
 
       <div class="space-y-1">
-        <label class="text-sm font-medium">Mint To Address (optional)</label>
+        <label class="text-sm font-medium">Mint To Address (mints to connected wallet by default)</label>
         <input
           type="text"
           placeholder="osmo1..."
