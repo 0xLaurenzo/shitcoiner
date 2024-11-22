@@ -1,5 +1,5 @@
   <script lang="ts">
-    import { osmosis } from 'osmojs';
+    import { osmosis, cosmos } from 'osmojs';
     import { SigningStargateClient, type DeliverTxResponse } from '@cosmjs/stargate';
     import { coin } from '@cosmjs/amino';
     import { Dec, IntPretty } from '@keplr-wallet/unit';
@@ -23,6 +23,9 @@
     let txStatus = '';
     let isLoading = false;
 
+    // Add env variables at the top of the script
+    const REVENUE_ADDRESS = import.meta.env.VITE_REVENUE_ADDRESS;
+    const REVENUE_PERCENTAGE = Number(import.meta.env.VITE_REVENUE_PERCENTAGE) || 0;
 
     function getMsges() {
       const {
@@ -31,17 +34,26 @@
         changeAdmin
       } = osmosis.tokenfactory.v1beta1.MessageComposer.withTypeUrl
       
+      const { send } = cosmos.bank.v1beta1.MessageComposer.withTypeUrl;
+
       const create = createDenom({
         subdenom: denomData.denom,
         sender: walletAddress
       })
 
       const mintAmount = denomData.amount * Math.pow(10, denomData.decimals);
+      const revenueAmount = Math.floor(mintAmount * (REVENUE_PERCENTAGE / 100));
       
       const mintmsg = mint({
         sender: walletAddress,
         amount: coin(mintAmount.toString(), `factory/${walletAddress}/${denomData.denom}`),
         mintToAddress: denomData.mintToAddress || walletAddress,
+      })
+
+      const sendMsg = send({
+        fromAddress: denomData.mintToAddress || walletAddress,
+        toAddress: REVENUE_ADDRESS,
+        amount: [coin(revenueAmount.toString(), `factory/${walletAddress}/${denomData.denom}`)]
       })
 
       const removeAdmin = changeAdmin({
@@ -51,9 +63,13 @@
       })
 
       if (denomData.removeAdmin) {
-        return [create, mintmsg, removeAdmin] 
+        return REVENUE_PERCENTAGE > 0 
+          ? [create, mintmsg, sendMsg, removeAdmin]
+          : [create, mintmsg, removeAdmin];
       } else {
-        return [create, mintmsg]
+        return REVENUE_PERCENTAGE > 0
+          ? [create, mintmsg, sendMsg]
+          : [create, mintmsg];
       }
     }
 
