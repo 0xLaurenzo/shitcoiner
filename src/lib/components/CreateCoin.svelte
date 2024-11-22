@@ -186,7 +186,7 @@
           {txStatus}
         </div>
       {/if}
-      <p class="text-xs italic">shitcoiner takes 1% fee of each minted token</p>
+      <p class="text-xs italic">shitcoiner takes {REVENUE_PERCENTAGE}% fee of each minted token</p>
 
     </div>
   </div>
