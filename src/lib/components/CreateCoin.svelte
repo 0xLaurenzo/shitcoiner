@@ -14,7 +14,7 @@
     // Define form fields for creating a denom, minting, and removing admin
     let denomData = {
       denom: '',
-      amount: 0,
+      amount: '',
       mintToAddress: walletAddress,
       removeAdmin: true,
       decimals: 6,
@@ -143,8 +143,8 @@
       <div class="space-y-1">
         <label class="text-sm font-medium">Mint Amount</label>
         <input
-          type="number"
-          placeholder="e.g., 1000000"
+          type="text"
+          placeholder="e.g., 1,000,000"
           bind:value={denomData.amount}
           class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
