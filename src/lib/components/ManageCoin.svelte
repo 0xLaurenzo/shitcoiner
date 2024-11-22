@@ -13,7 +13,7 @@
     
     let client: any;
     let tokens: any;
-    let balances: any;
+    let balances: any[] = [];
 
     let burnAmount: string = "";
     let selectedToken: string = "";
@@ -85,11 +85,11 @@
     <form on:submit|preventDefault={handleBurn}>
         <select bind:value={selectedToken} required>
             <option value="">Select token</option>
-            <!-- {#if balances?.denoms} -->
-                {#each balances as balance}
+            {#if balances}
+                {#each balances.filter(b => b.denom.startsWith('factory')) as balance}
                     <option value={balance.denom}>{balance.denom}</option>
                 {/each}
-            <!-- {/if} -->
+            {/if}
         </select>
         
         <input 
