@@ -7,6 +7,7 @@
     import { Result, ok, err } from 'neverthrow';
 
     import { registry } from "$lib/registry";
+	  import { createStargateClient } from '$lib/stargate';
 
     export let signer: OfflineSigner;
     export let walletAddress: string;
@@ -84,11 +85,7 @@
         const msgs = getMsges();
         
         // Create SigningStargateClient from signer
-        const stargateClient = await SigningStargateClient.connectWithSigner(
-          RPC_ENDPOINT,
-          signer,
-          { registry }
-        );
+        const stargateClient = await createStargateClient(RPC_ENDPOINT, signer);
 
         const gasEstimated = await stargateClient.simulate(walletAddress, msgs, "");
         const fee = {

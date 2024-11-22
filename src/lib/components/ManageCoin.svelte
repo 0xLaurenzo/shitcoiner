@@ -4,6 +4,7 @@
     import { coin } from '@cosmjs/amino';
     import { Dec, IntPretty } from '@keplr-wallet/unit';
     import type { OfflineSigner } from '@cosmjs/proto-signing';
+	import { createStargateClient } from '$lib/stargate';
 
       
     export let signer: OfflineSigner;
@@ -12,7 +13,6 @@
     const RPC_ENDPOINT = import.meta.env.VITE_RPC_ENDPOINT || "https://osmosis-rpc.publicnode.com:443";
     
     let client: any;
-    let tokens: any;
     let balances: any[] = [];
 
     let burnAmount: string = "";
@@ -24,23 +24,14 @@
 
         balances = (await client.cosmos.bank.v1beta1
                 .allBalances({ address: walletAddress })).balances;
-        
-        console.log(balances)
-        
-        // // now you can query the cosmos modules
-        // tokens = await client.osmosis.tokenfactory.v1beta1.denomsFromCreator({ creator: walletAddress });
-        // console.log(tokens);
     }
 
     initClient();
 
     async function handleBurn() {
         try {
-            const signingClient = await SigningStargateClient.connectWithSigner(
-                RPC_ENDPOINT,
-                signer
-            );
-            
+            const signingClient = await createStargateClient(RPC_ENDPOINT, signer);
+
             const msg = {
                 typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurn",
                 value: {
