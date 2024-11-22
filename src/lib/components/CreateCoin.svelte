@@ -129,38 +129,52 @@
 
   <div class="max-w-md mx-auto p-4">
     <h2 class="text-xl font-bold mb-4">Create, Mint, and Remove Admin for a Denom</h2>
-
     <div class="space-y-3">
-      <input
-        type="text"
-        placeholder="Denom Name (subdenom)"
-        bind:value={denomData.denom}
-        class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
-      <input
-        type="number"
-        placeholder="Mint Amount"
-        bind:value={denomData.amount}
-        class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
-      <input
-        type="text"
-        placeholder="Mint To Address (optional)"
-        bind:value={denomData.mintToAddress}
-        class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
-      <input
-        type="number"
-        placeholder="Decimals (default: 6)"
-        bind:value={denomData.decimals}
-        min="0"
-        max="18"
-        class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-      />
+      <div class="space-y-1">
+        <label class="text-sm font-medium">Denom Name (subdenom)</label>
+        <input
+          type="text"
+          placeholder="e.g., MOON"
+          bind:value={denomData.denom}
+          class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <label class="text-sm font-medium">Mint Amount</label>
+        <input
+          type="number"
+          placeholder="e.g., 1000000"
+          bind:value={denomData.amount}
+          class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <label class="text-sm font-medium">Mint To Address (optional)</label>
+        <input
+          type="text"
+          placeholder="osmo1..."
+          bind:value={denomData.mintToAddress}
+          class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      <div class="space-y-1">
+        <label class="text-sm font-medium">Decimals</label>
+        <input
+          type="number"
+          placeholder="6"
+          bind:value={denomData.decimals}
+          min="0"
+          max="18"
+          class="w-full px-3 py-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
 
       <label class="flex items-center space-x-2 mb-4">
         <input type="checkbox" bind:checked={denomData.removeAdmin} />
-        <span>Remove Admin After Minting</span>
+        <span>Renounce Admin After Minting</span>
       </label>
 
       <button 
@@ -175,5 +189,7 @@
           {txStatus}
         </div>
       {/if}
+      <p class="text-xs italic">shitcoiner takes 1% fee of each minted token</p>
+
     </div>
   </div>
