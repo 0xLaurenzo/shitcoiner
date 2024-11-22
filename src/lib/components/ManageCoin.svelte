@@ -110,7 +110,7 @@
             disabled={!selectedToken || !burnAmount}
             class="bg-red-500 text-white py-3 px-4 rounded-md font-semibold transition-colors duration-200 hover:bg-red-600 disabled:bg-red-200 disabled:cursor-not-allowed"
         >
-            Burn Tokens
+        🔥Burn Tokens🔥
         </button>
     </form>
 </div>
