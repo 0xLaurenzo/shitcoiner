@@ -26,6 +26,8 @@
     // Add env variables at the top of the script
     const REVENUE_ADDRESS = import.meta.env.VITE_REVENUE_ADDRESS;
     const REVENUE_PERCENTAGE = Number(import.meta.env.VITE_REVENUE_PERCENTAGE) || 0;
+    const RPC_ENDPOINT = import.meta.env.VITE_RPC_ENDPOINT || "https://osmosis-rpc.publicnode.com:443";
+
 
     function getMsges() {
       const {
@@ -83,7 +85,7 @@
         
         // Create SigningStargateClient from signer
         const stargateClient = await SigningStargateClient.connectWithSigner(
-          "https://osmosis-rpc.publicnode.com:443", // Osmosis RPC endpoint
+          RPC_ENDPOINT,
           signer,
           { registry }
         );
