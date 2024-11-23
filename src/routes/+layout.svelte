@@ -27,7 +27,7 @@
 </div>
 
 <main class="pt-16">
-  <slot />
+  {@render children()}
 </main>
 
 <style>
