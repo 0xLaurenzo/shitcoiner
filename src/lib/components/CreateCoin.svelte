@@ -1,12 +1,10 @@
   <script lang="ts">
     import { osmosis, cosmos } from 'osmojs';
-    import { SigningStargateClient, type DeliverTxResponse } from '@cosmjs/stargate';
     import { coin } from '@cosmjs/amino';
     import { Dec, IntPretty } from '@keplr-wallet/unit';
     import type { OfflineSigner } from '@cosmjs/proto-signing';
     import { Result, ok, err } from 'neverthrow';
 
-    import { registry } from "$lib/registry";
 	  import { createStargateClient } from '$lib/stargate';
 
     export let signer: OfflineSigner;

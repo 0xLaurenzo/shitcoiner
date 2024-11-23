@@ -60,45 +60,47 @@
 
 </script>
 
-<p>TODO add a section for common actions such as burning</p>
-<ul>
+<p class="mb-4">TODO add a section for common actions such as burning</p>
+<ul class="mb-4">
     <li>Mint</li>
     <li>Send</li>
     <li>Create CL pool</li>
     <li>Add to CL pool</li>
 </ul>
 
-<div class="bg-red-50 border-2 border-red-400 rounded-lg p-6 my-4 shadow-md">
-    <h3 class="text-red-700 text-xl font-semibold mb-4">Burn Tokens</h3>
-    <form on:submit|preventDefault={handleBurn} class="flex flex-col gap-4">
-        <select 
-            bind:value={selectedToken} 
-            required
-            class="p-2 border border-red-200 rounded-md text-base focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"
-        >
-            <option value="">Select token</option>
-            {#if balances}
-                {#each balances.filter(b => b.denom.startsWith('factory')) as balance}
-                    <option value={balance.denom}>{balance.denom}</option>
-                {/each}
-            {/if}
-        </select>
-        
-        <input 
-            type="number" 
-            bind:value={burnAmount} 
-            placeholder="Amount to burn" 
-            required 
-            min="0"
-            class="p-2 border border-red-200 rounded-md text-base focus:ring-2 focus:ring-red-400 focus:border-red-400 outline-none"
-        />
-        
-        <button 
-            type="submit" 
-            disabled={!selectedToken || !burnAmount}
-            class="bg-red-500 text-white py-3 px-4 rounded-md font-semibold transition-colors duration-200 hover:bg-red-600 disabled:bg-red-200 disabled:cursor-not-allowed"
-        >
-        🔥Burn Tokens🔥
-        </button>
+<div class="bg-red-50 border-2 border-red-400 rounded-lg p-4 my-2 shadow-sm">
+    <h3 class="text-red-700 text-lg font-semibold mb-2">Burn Tokens</h3>
+    <form on:submit|preventDefault={handleBurn} class="flex flex-col gap-2">
+        <div class="flex gap-2">
+            <select 
+                bind:value={selectedToken} 
+                required
+                class="flex-1 p-1.5 border border-red-200 rounded-md text-sm focus:ring-1 focus:ring-red-400 focus:border-red-400 outline-none"
+            >
+                <option value="">Select token</option>
+                {#if balances}
+                    {#each balances.filter(b => b.denom.startsWith('factory')) as balance}
+                        <option value={balance.denom}>{balance.denom}</option>
+                    {/each}
+                {/if}
+            </select>
+            
+            <input 
+                type="number" 
+                bind:value={burnAmount} 
+                placeholder="Amount" 
+                required 
+                min="0"
+                class="flex-1 p-1.5 border border-red-200 rounded-md text-sm focus:ring-1 focus:ring-red-400 focus:border-red-400 outline-none"
+            />
+            
+            <button 
+                type="submit" 
+                disabled={!selectedToken || !burnAmount}
+                class="bg-red-500 text-white px-3 rounded-md font-medium text-sm transition-colors duration-200 hover:bg-red-600 disabled:bg-red-200 disabled:cursor-not-allowed"
+            >
+            🔥Burn
+            </button>
+        </div>
     </form>
 </div>

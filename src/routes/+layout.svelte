@@ -1,5 +1,8 @@
 <script lang="ts">
 	import '../app.css';
+	import Navbar from '$lib/components/Navbar.svelte';
+
+
 	let { children } = $props();
 
 	// Generate random peppers
@@ -11,6 +14,7 @@
 	}));
 </script>
 
+<Navbar/>;
 <div class="pepper-background">
 	{#each peppers as pepper}
 		<span
@@ -22,7 +26,9 @@
 	{/each}
 </div>
 
-{@render children()}
+<main class="pt-16">
+  <slot />
+</main>
 
 <style>
 	.pepper-background {
