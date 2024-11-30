@@ -2,26 +2,25 @@
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 
-
 	let { children } = $props();
 
-	// Generate random peppers
-	const peppers = Array.from({ length: 20 }, () => ({
+	// Generate random peppers and mountains for the background
+	const emojis = Array.from({ length: 40 }, () => ({
 		x: Math.random() * 100,
 		y: Math.random() * 100,
 		rotation: Math.random() * 360,
-		emoji: '🌶️'
+		emoji: Math.random() > 0.5 ? '🌶️' : '🏔️'
 	}));
 </script>
 
 <Navbar/>;
-<div class="pepper-background">
-	{#each peppers as pepper}
+<div class="emoji-background">
+	{#each emojis as emoji}
 		<span
 			class="pepper"
-			style="left: {pepper.x}%; top: {pepper.y}%; transform: rotate({pepper.rotation}deg);"
+			style="left: {emoji.x}%; top: {emoji.y}%; transform: rotate({emoji.rotation}deg);"
 		>
-			{pepper.emoji}
+			{emoji.emoji}
 		</span>
 	{/each}
 </div>
@@ -31,7 +30,7 @@
 </main>
 
 <style>
-	.pepper-background {
+	.emoji-background {
 		position: fixed;
 		inset: 0;
 		z-index: -1;
